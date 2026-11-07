@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فروش قاب ام | OMM CASE — قاب‌های پیکسلی و نئونی</title>
+<meta name="description" content="فروش قاب ام — قاب‌های موبایل پیکسلی و نئونی با طراحی اختصاصی">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#05010f; --panel:#0d0722; --panel2:#130a30; --line:#2b1c55;
+  --pink:#ff2ec4; --cyan:#00f0ff; --purple:#9b5cff; --green:#39ff14; --yellow:#ffe600; --orange:#ff9d00;
+  --txt:#e6e4ff; --dim:#9a93c9;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
+body.locked{overflow:hidden}
+[hidden]{display:none!important}
+::selection{background:var(--cyan);color:#000}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#0a0518}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--pink),var(--purple))}
+.latin{font-family:'Press Start 2P',monospace;direction:ltr}
+.px{clip-path:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px))}
+
+.scanlines{position:fixed;inset:0;pointer-events:none;z-index:9990;background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);opacity:.5}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:9989;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,10,.55))}
+
+.btn{font-family:inherit;font-weight:900;font-size:.92rem;padding:.85rem 1.7rem;cursor:pointer;border:none;background:var(--cyan);color:#04101a;transition:.15s;filter:drop-shadow(0 0 8px rgba(0,240,255,.5))}
+.btn:hover{transform:translateY(-3px);filter:drop-shadow(0 0 16px rgba(0,240,255,.95))}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.btn.pink{background:var(--pink);color:#fff;filter:drop-shadow(0 0 8px rgba(255,46,196,.5))}
+.btn.pink:hover{filter:drop-shadow(0 0 16px rgba(255,46,196,.95))}
+.btn.ghosty{background:transparent;color:var(--cyan);box-shadow:inset 0 0 0 2px var(--cyan)}
+.btn.sm{padding:.55rem 1rem;font-size:.8rem}
+.btn.danger{background:#ff3860;color:#fff;filter:drop-shadow(0 0 8px rgba(255,56,96,.5))}
+
+.ticker{background:linear-gradient(90deg,var(--purple),var(--pink));overflow:hidden;padding:.45rem 0;border-bottom:2px solid var(--line)}
+.ticker-track{display:flex;gap:3rem;white-space:nowrap;width:max-content;animation:tick 24s linear infinite;direction:ltr}
+.ticker-track span{color:#fff;font-weight:800;font-size:.8rem;text-shadow:0 0 6px rgba(0,0,0,.4)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+header{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:1rem;padding:.7rem 1.2rem;background:rgba(7,2,20,.85);backdrop-filter:blur(12px);border-bottom:2px solid var(--line)}
+.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1.2}
+.logo .fa{font-weight:900;font-size:1.2rem;color:#fff;text-shadow:0 0 8px var(--pink),0 0 22px var(--pink)}
+.logo .en{font-size:.48rem;color:var(--cyan);text-shadow:0 0 8px var(--cyan);letter-spacing:1px;margin-top:3px}
+nav{display:flex;gap:1.3rem;margin-inline-start:1.5rem}
+nav a{color:var(--dim);text-decoration:none;font-weight:700;font-size:.9rem;transition:.2s}
+nav a:hover{color:var(--cyan);text-shadow:0 0 10px var(--cyan)}
+.spacer{flex:1}
+.chip{display:none;align-items:center;gap:.55rem;background:var(--panel2);border:2px solid var(--line);padding:.4rem .75rem;font-size:.8rem}
+.chip b{color:var(--green)}
+.chip button{background:none;border:none;color:var(--dim);cursor:pointer;font-size:1rem}
+.chip button:hover{color:var(--pink)}
+.icon-btn{position:relative;width:42px;height:42px;display:grid;place-items:center;background:var(--panel2);border:2px solid var(--line);color:var(--txt);cursor:pointer;font-size:1.1rem;transition:.2s}
+.icon-btn:hover{border-color:var(--cyan);color:var(--cyan);filter:drop-shadow(0 0 8px var(--cyan))}
+#cartCount{position:absolute;top:-8px;inset-inline-end:-8px;min-width:19px;height:19px;display:none;place-items:center;background:var(--pink);color:#fff;font-size:.65rem;font-weight:800;padding:0 4px}
+
+.hero{position:relative;min-height:88vh;display:grid;place-items:center;text-align:center;overflow:hidden;border-bottom:2px solid var(--line);background:radial-gradient(1200px 500px at 50% -10%,rgba(155,92,255,.25),transparent 60%)}
+#stars{position:absolute;inset:0}
+.star{position:absolute;animation:twinkle 2.4s infinite}
+@keyframes twinkle{0%,100%{opacity:.15}50%{opacity:1}}
+.hero-inner{position:relative;z-index:2;padding:2rem 1rem;max-width:860px}
+.pill{display:inline-flex;align-items:center;gap:.5rem;border:2px solid var(--green);color:var(--green);padding:.45rem 1.1rem;font-size:.8rem;font-weight:800;margin-bottom:1.5rem;animation:blinkSign 2.2s infinite;text-shadow:0 0 8px var(--green)}
+@keyframes blinkSign{0%,100%{opacity:1}50%{opacity:.5}}
+h1{font-size:clamp(2rem,6vw,3.6rem);font-weight:900;line-height:1.4;text-shadow:0 0 12px rgba(0,240,255,.7),0 0 44px rgba(255,46,196,.45)}
+h1 em{font-style:normal;color:var(--pink);text-shadow:0 0 16px var(--pink)}
+.sub{color:var(--dim);margin:1.3rem auto 2.1rem;max-width:580px;line-height:2.1}
+.cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.stats{display:flex;gap:2.6rem;justify-content:center;margin-top:2.8rem;flex-wrap:wrap}
+.stats b{display:block;font-size:1.5rem;color:var(--yellow);text-shadow:0 0 12px var(--yellow)}
+.stats span{font-size:.78rem;color:var(--dim)}
+.floor{position:absolute;inset-inline:0;bottom:0;height:44vh;pointer-events:none;perspective:280px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 30%);mask-image:linear-gradient(to bottom,transparent 0,#000 30%)}
+.floor::before{content:'';position:absolute;inset:-70% -40%;background:repeating-linear-gradient(90deg,rgba(255,46,196,.4) 0 2px,transparent 2px 64px),repeating-linear-gradient(0deg,rgba(0,240,255,.4) 0 2px,transparent 2px 64px);transform:rotateX(60deg);animation:floor 1.4s linear infinite}
+@keyframes floor{to{background-position:0 0,0 64px}}
+.floor::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--pink);box-shadow:0 0 26px 5px var(--pink)}
+
+section{padding:4.5rem 1.2rem}
+.wrap{max-width:1100px;margin-inline:auto}
+.sec-head{text-align:center;margin-bottom:2.8rem}
+.sec-head h2{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;text-shadow:0 0 12px var(--purple)}
+.sec-head .latin{display:block;font-size:.55rem;color:var(--cyan);margin-top:.7rem;text-shadow:0 0 8px var(--cyan)}
+
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.6rem}
+.card{position:relative;background:var(--panel);border:2px solid var(--line);padding:1.4rem;display:flex;flex-direction:column;gap:.65rem;transition:.2s;text-align:center}
+.card:hover{transform:translateY(-6px);border-color:var(--pink);filter:drop-shadow(0 0 16px rgba(255,46,196,.35))}
+.badge{position:absolute;top:12px;inset-inline-start:12px;background:var(--c,var(--pink));color:#05010f;font-size:.68rem;font-weight:900;padding:.28rem .6rem;z-index:2}
+.art{display:grid;place-items:center;height:150px;background:repeating-conic-gradient(#0b0521 0% 25%,#110a2e 0% 50%);background-size:22px 22px;border:2px solid var(--line);margin-bottom:.4rem}
+.p-art{display:grid;image-rendering:pixelated}
+.p-art i{display:block}
+.card h3{font-size:1.05rem;font-weight:900}
+.desc{font-size:.78rem;color:var(--dim);flex:1;line-height:1.9}
+.price{font-size:.85rem;color:var(--dim)}
+.price b{font-size:1.15rem;color:var(--yellow);text-shadow:0 0 10px rgba(255,230,0,.6)}
+.price s{opacity:.5;margin-inline-start:.4rem;font-size:.75rem}
+
+#featGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem}
+.feat{background:var(--panel);border:2px solid var(--line);padding:1.7rem;text-align:center;transition:.2s}
+.feat:hover{border-color:var(--cyan);transform:translateY(-4px)}
+.feat .fi{display:grid;place-items:center;margin-bottom:1rem}
+.feat h3{font-size:1rem;font-weight:900;margin-bottom:.45rem}
+.feat p{font-size:.8rem;color:var(--dim);line-height:1.9}
+
+footer{border-top:2px solid var(--line);background:#070318;padding:3rem 1.2rem 2rem;margin-top:2rem}
+.f-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;max-width:1100px;margin-inline:auto}
+footer h4{color:var(--cyan);margin-bottom:.8rem;text-shadow:0 0 8px var(--cyan)}
+footer p,footer a{color:var(--dim);font-size:.85rem;line-height:2.1;text-decoration:none;display:block}
+footer a:hover{color:var(--pink)}
+.copy{text-align:center;color:#55507e;font-size:.75rem;margin-top:2.5rem}
+.admin-link{opacity:.35;font-size:.7rem}
+.admin-link:hover{opacity:1;color:var(--green)!important}
+
+#gate{position:fixed;inset:0;z-index:500;display:grid;place-items:center;padding:1rem;background:radial-gradient(900px 500px at 20% 10%,rgba(255,46,196,.16),transparent),radial-gradient(900px 500px at 80% 90%,rgba(0,240,255,.13),transparent),var(--bg);transition:opacity .5s,visibility .5s}
+#gate.hide{opacity:0;visibility:hidden;pointer-events:none}
+.gate-box{width:min(460px,94vw);background:var(--panel);border:2px solid var(--purple);padding:2.3rem 1.9rem;filter:drop-shadow(0 0 26px rgba(155,92,255,.4));animation:pop .5s ease}
+@keyframes pop{from{transform:translateY(26px);opacity:0}}
+.gate-logo{text-align:center;margin-bottom:.9rem}
+.gate-logo .fa{font-size:2rem;font-weight:900;text-shadow:0 0 14px var(--pink),0 0 38px var(--pink)}
+.gate-logo .en{display:block;font-size:.58rem;color:var(--cyan);text-shadow:0 0 8px var(--cyan);margin-top:.6rem}
+.gate-sub{text-align:center;color:var(--dim);font-size:.82rem;margin-bottom:1.7rem;line-height:1.9}
+.field{margin-bottom:1.05rem}
+.field label{display:block;font-size:.78rem;font-weight:800;color:var(--cyan);margin-bottom:.45rem;text-shadow:0 0 6px rgba(0,240,255,.5)}
+.field input{width:100%;background:#0a0420;border:2px solid var(--line);color:#fff;font-family:inherit;font-size:.95rem;padding:.8rem 1rem;outline:none;transition:.2s}
+.field input:focus{border-color:var(--cyan);filter:drop-shadow(0 0 6px rgba(0,240,255,.5))}
+.field input.bad{border-color:#ff3860;animation:shake .4s}
+.field .err{display:block;color:#ff5c7a;font-size:.72rem;margin-top:.4rem;min-height:1em}
+.field .hint{color:#55507e;font-size:.68rem;margin-top:.3rem;display:block}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.gate-btn{width:100%;margin-top:.4rem}
+.gate-note{text-align:center;color:#55507e;font-size:.7rem;margin-top:1.2rem;line-height:1.9}
+
+#overlay{position:fixed;inset:0;background:rgba(3,0,12,.72);backdrop-filter:blur(3px);z-index:900;opacity:0;visibility:hidden;transition:.3s}
+#overlay.show{opacity:1;visibility:visible}
+#cartDrawer{position:fixed;top:0;bottom:0;left:0;width:min(380px,92vw);background:var(--panel);border-inline-end:2px solid var(--purple);z-index:1000;transform:translateX(-105%);transition:.35s cubic-bezier(.2,.9,.3,1.15);display:flex;flex-direction:column;padding:1.4rem}
+#cartDrawer.open{transform:translateX(0)}
+.d-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem}
+.d-head h3{text-shadow:0 0 10px var(--pink)}
+.x-btn{background:none;border:2px solid var(--line);color:var(--txt);width:34px;height:34px;cursor:pointer;font-size:1rem}
+.x-btn:hover{border-color:var(--pink);color:var(--pink)}
+#cartItems{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:.8rem}
+.c-item{display:flex;align-items:center;gap:.7rem;background:var(--panel2);border:2px solid var(--line);padding:.6rem}
+.c-art{display:grid;place-items:center;width:56px;height:56px;background:repeating-conic-gradient(#0b0521 0% 25%,#110a2e 0% 50%);background-size:14px 14px;flex:none}
+.c-info{flex:1;display:flex;flex-direction:column;gap:.2rem}
+.c-info b{font-size:.85rem}
+.c-info span{font-size:.72rem;color:var(--yellow)}
+.c-del{background:none;border:none;color:var(--dim);cursor:pointer;font-size:1rem}
+.c-del:hover{color:#ff3860}
+.empty{text-align:center;color:var(--dim);font-size:.85rem;line-height:2;padding:2rem 0}
+.d-foot{border-top:2px solid var(--line);padding-top:1rem;margin-top:1rem}
+.d-total{display:flex;justify-content:space-between;margin-bottom:1rem;font-weight:800}
+.d-total b{color:var(--yellow);text-shadow:0 0 10px rgba(255,230,0,.5)}
+
+.modal{position:fixed;inset:0;z-index:1100;display:grid;place-items:center;padding:1rem;opacity:0;visibility:hidden;transition:.3s}
+.modal.show{opacity:1;visibility:visible}
+.modal-box{width:min(420px,94vw);background:var(--panel);border:2px solid var(--green);padding:2.2rem;text-align:center;filter:drop-shadow(0 0 22px rgba(57,255,20,.3))}
+.modal-box .m-art{display:grid;place-items:center;margin-bottom:1rem}
+#orderCode{font-size:1rem;color:var(--cyan);text-shadow:0 0 10px var(--cyan);margin:.9rem 0 .4rem}
+.modal-box p{color:var(--dim);font-size:.85rem;line-height:2.1}
+
+#toasts{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);z-index:1200;display:flex;flex-direction:column;gap:.6rem;align-items:center;width:max-content;max-width:92vw}
+.toast{background:var(--panel2);border:2px solid var(--cyan);color:#fff;padding:.7rem 1.3rem;font-size:.85rem;font-weight:700;filter:drop-shadow(0 0 10px rgba(0,240,255,.4));animation:tin .3s ease;max-width:92vw}
+.toast.ok{border-color:var(--green)}
+.toast.err{border-color:#ff3860}
+.toast.out{opacity:0;transform:translateY(10px);transition:.4s}
+@keyframes tin{from{opacity:0;transform:translateY(12px)}}
+.cf{position:fixed;top:-24px;z-index:1300;animation:fall 1.9s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(115vh) rotate(540deg)}}
+
+#admin{position:fixed;inset:0;z-index:600;background:var(--bg);overflow-y:auto;padding:2rem 1.2rem}
+.a-head{max-width:1000px;margin:0 auto 1.4rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}
+.a-head h2{text-shadow:0 0 12px var(--green)}
+.a-head .latin{display:block;font-size:.5rem;color:var(--green);margin-top:.5rem;text-shadow:0 0 8px var(--green)}
+.a-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.a-stats{max-width:1000px;margin:0 auto 1.2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.stat{background:var(--panel);border:2px solid var(--line);padding:1.3rem;text-align:center}
+.stat b{display:block;font-size:1.55rem;color:var(--cyan);text-shadow:0 0 12px var(--cyan);margin-bottom:.3rem}
+.stat span{font-size:.75rem;color:var(--dim)}
+.srv{max-width:1000px;margin:0 auto 1rem;padding:.75rem 1rem;font-size:.8rem;border:2px solid var(--line);background:var(--panel)}
+.srv.ok{border-color:var(--green);color:var(--green)}
+.srv.warn{border-color:var(--yellow);color:var(--yellow)}
+.srv.err{border-color:#ff3860;color:#ff8ba3}
+.a-tools{max-width:1000px;margin:0 auto 1rem;display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+#searchUser{flex:1;min-width:220px;background:#0a0420;border:2px solid var(--line);color:#fff;padding:.7rem 1rem;font-family:inherit;outline:none}
+#searchUser:focus{border-color:var(--cyan)}
+.table-wrap{max-width:1000px;margin:0 auto;border:2px solid var(--line);overflow-x:auto;background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:640px}
+th{background:var(--panel2);color:var(--pink);padding:.9rem;font-size:.75rem;border-bottom:2px solid var(--line);white-space:nowrap}
+td{padding:.8rem .9rem;border-bottom:1px solid #1b1040;text-align:center}
+tbody tr:hover{background:rgba(0,240,255,.05)}
+.mob{color:var(--green);text-shadow:0 0 8px rgba(57,255,20,.4);font-weight:700}
+.off-tag{font-size:.65rem;color:var(--orange)}
+.a-note{max-width:1000px;margin:1.1rem auto 0;color:#55507e;font-size:.72rem;line-height:2}
+.pin-box{max-width:380px;margin:12vh auto 0;background:var(--panel);border:2px solid var(--cyan);padding:2.2rem;text-align:center;filter:drop-shadow(0 0 20px rgba(0,240,255,.35))}
+#pinInput{width:100%;margin:1.1rem 0 .4rem;background:#0a0420;border:2px solid var(--line);color:var(--cyan);font-size:1.4rem;text-align:center;letter-spacing:.5rem;padding:.8rem;font-family:inherit;outline:none}
+#pinInput.bad{border-color:#ff3860;animation:shake .4s}
+#pinErr{color:#ff5c7a;font-size:.78rem;min-height:1.3em}
+
+@media(max-width:720px){
+  nav{display:none}
+  .stats{gap:1.4rem}
+  header{gap:.6rem}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════ گیت ثبت‌نام ═══════════ -->
+<div id="gate">
+  <form class="gate-box px" id="regForm" novalidate>
+    <div class="gate-logo">
+      <span class="fa">فروش قاب ام</span>
+      <span class="en latin">OMM•CASE•PIXEL•SHOP</span>
+    </div>
+    <p class="gate-sub">برای ورود به دنیای پیکسلی قاب‌ها، اول خودت رو معرفی کن 👾</p>
+    <div class="field">
+      <label for="fName">نام</label>
+      <input id="fName" type="text" autocomplete="given-name" placeholder="مثلاً: علی">
+      <span class="err"></span>
+    </div>
+    <div class="field">
+      <label for="lName">نام خانوادگی</label>
+      <input id="lName" type="text" autocomplete="family-name" placeholder="مثلاً: رضایی">
+      <span class="err"></span>
+    </div>
+    <div class="field">
+      <label for="phone">شماره موبایل</label>
+      <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09123456789" dir="ltr" style="text-align:center">
+      <span class="err"></span>
+      <span class="hint">با ۰۹ شروع می‌شود — مثال: 09123456789</span>
+    </div>
+    <button type="submit" class="btn pink gate-btn px" id="regSubmit">🚀 ورود به فروشگاه</button>
+    <p class="gate-note">🔒 اطلاعات ورود شما به سرور سایت ارسال و در پنل مدیریت ثبت می‌شود.</p>
+  </form>
+</div>
+
+<!-- ═══════════ سایت ═══════════ -->
+<div id="site">
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>★ ارسال رایگان بالای ۵۰۰ هزار تومان ★ کد تخفیف اولین خرید: PIXEL10 ★ طراحی اختصاصی با عکس خودت ★ ضمانت ۷ روزه بازگشت ★ قاب‌های پیکسلی محدود ★</span>
+      <span>★ ارسال رایگان بالای ۵۰۰ هزار تومان ★ کد تخفیف اولین خرید: PIXEL10 ★ طراحی اختصاصی با عکس خودت ★ ضمانت ۷ روزه بازگشت ★ قاب‌های پیکسلی محدود ★</span>
+    </div>
+  </div>
+
+  <header>
+    <a class="logo" href="#home">
+      <span class="fa">فروش قاب ام</span>
+      <span class="en latin">OMM•CASE•PIXEL•SHOP</span>
+    </a>
+    <nav>
+      <a href="#home">خانه</a>
+      <a href="#products">قاب‌ها</a>
+      <a href="#features">ویژگی‌ها</a>
+      <a href="#contact">تماس</a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="chip px" id="userChip"></div>
+    <button class="icon-btn px" id="soundBtn" title="صدا">🔊</button>
+    <button class="icon-btn px" id="cartBtn" title="سبد خرید">🛒<span id="cartCount">۰</span></button>
+  </header>
+
+  <section class="hero" id="home">
+    <div id="stars"></div>
+    <div class="hero-inner">
+      <span class="pill px">🕹️ OPEN 24/7 — دنیای پیکسلی قاب‌ها</span>
+      <h1>قاب گوشیت رو <em>پیکسلی</em> کن!</h1>
+      <p class="sub">فروش قاب ام — طرح‌های اختصاصی نئون و پیکسل‌آرت برای آیفون، سامسونگ و شیائومی. چاپ باکیفیت، ارسال به سراسر ایران.</p>
+      <div class="cta">
+        <a href="#products"><button type="button" class="btn pink px">🔥 دیدن قاب‌ها</button></a>
+        <a href="#features"><button type="button" class="btn ghosty px">ویژگی‌ها</button></a>
+      </div>
+      <div class="stats">
+        <div><b>+۱۲٬۰۰۰</b><span>مشتری خوشحال</span></div>
+        <div><b>۴٫۹ ★</b><span>امتیاز از ۵</span></div>
+        <div><b>۲۴ ساعت</b><span>ارسال در تهران</span></div>
+      </div>
+    </div>
+    <div class="floor"></div>
+  </section>
+
+  <section id="products">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>🎮 قاب‌های پیکسلی</h2>
+        <span class="latin">— CHOOSE YOUR SKIN —</span>
+      </div>
+      <div id="grid"></div>
+    </div>
+  </section>
+
+  <section id="features" style="background:#08031a;border-block:2px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>⚡ چرا قاب ام؟</h2>
+        <span class="latin">— WHY OMM CASE —</span>
+      </div>
+      <div id="featGrid">
+        <div class="feat px"><div class="fi" data-art="bolt" data-color="#00f0ff"></div><h3>ارسال سریع</h3><p>پست پیشتاز به سراسر ایران؛ تهران زیر ۲۴ ساعت.</p></div>
+        <div class="feat px"><div class="fi" data-art="heart" data-color="#ff2ec4"></div><h3>طراحی اختصاصی</h3><p>عکس یا طرح خودت رو بفرست، ما چاپش می‌کنیم.</p></div>
+        <div class="feat px"><div class="fi" data-art="shield" data-color="#39ff14"></div><h3>ضمانت اصالت</h3><p>۷ روز مهلت بازگشت بدون بهونه وگیری.</p></div>
+        <div class="feat px"><div class="fi" data-art="diamond" data-color="#ffe600"></div><h3>پرداخت امن</h3><p>درگاه بانکی معتبر و پرداخت در محل تهران.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="f-grid">
+      <div>
+        <h4>درباره قاب ام</h4>
+        <p>ما عاشق دنیای رترو و گیمیم! قاب‌های ما ترکیبی از نوستالژی پیکسلی و نور نئون هستن؛ چاپ با کیفیت بالا روی قاب‌های محکم و با‌دوام.</p>
+      </div>
+      <div>
+        <h4>دسترسی سریع</h4>
+        <a href="#home">خانه</a><a href="#products">قاب‌ها</a><a href="#features">ویژگی‌ها</a>
+      </div>
+      <div>
+        <h4>تماس با ما</h4>
+        <a href="#">اینستاگرام: omm.case@</a>
+        <a href="#">تلگرام: OmmCase@</a>
+        <a href="#">ایمیل: hi@ommcase.ir</a>
+      </div>
+    </div>
+    <p class="copy">© <span id="year"></span> فروش قاب ام — ساخته‌شده با 💜 و پیکسل‌های زیاد &nbsp;|&nbsp; <a class="admin-link" href="#admin">دسترسی مدیر</a></p>
+  </footer>
+</div>
+
+<!-- ═══════════ سبد خرید ═══════════ -->
+<div id="overlay"></div>
+<aside id="cartDrawer">
+  <div class="d-head">
+    <h3>🛒 سبد خرید</h3>
+    <button class="x-btn" id="closeCart">✕</button>
+  </div>
+  <div id="cartItems"></div>
+  <div class="d-foot">
+    <div class="d-total"><span>مجموع:</span><b><span id="cartTotal">۰</span> تومان</b></div>
+    <button class="btn px" id="checkoutBtn" style="background:var(--green);width:100%">💳 ثبت سفارش</button>
+  </div>
+</aside>
+
+<div class="modal" id="orderModal">
+  <div class="modal-box px">
+    <div class="m-art" data-art="heart" data-color="#39ff14" data-size="8"></div>
+    <h3 style="text-shadow:0 0 10px var(--green)">سفارش ثبت شد! 🎉</h3>
+    <p id="orderCode" class="latin"></p>
+    <p id="orderSum"></p>
+    <p style="margin-top:.6rem;font-size:.75rem">به‌زودی برای هماهنگی ارسال باهات تماس می‌گیریم.</p>
+    <button class="btn px" id="closeOrder" style="margin-top:1.2rem">باشه!</button>
+  </div>
+</div>
+
+<!-- ═══════════ پنل ادمین (#admin) ═══════════ -->
+<div id="admin" hidden>
+  <div id="pinStep" hidden>
+    <form class="pin-box px" id="pinForm">
+      <h2 style="text-shadow:0 0 10px var(--cyan)">🔒 منطقه محافظت‌شده</h2>
+      <p style="color:var(--dim);font-size:.82rem;margin-top:.7rem">برای ورود به پنل مدیریت، رمز را وارد کنید:</p>
+      <input id="pinInput" type="password" inputmode="numeric" maxlength="8" placeholder="••••" dir="ltr">
+      <span id="pinErr"></span>
+      <button type="submit" class="btn px" style="width:100%">ورود به پنل</button>
+      <button type="button" class="btn ghosty px sm" id="pinBack" style="width:100%;margin-top:.6rem">بازگشت به سایت</button>
+    </form>
+  </div>
+
+  <div id="adminPanel" hidden>
+    <div class="a-head">
+      <div>
+        <h2>🛡️ پنل مدیریت — فروش قاب ام</h2>
+        <span class="latin">ADMIN PANEL // LIVE DB</span>
+      </div>
+      <div class="a-actions">
+        <button class="btn ghosty px sm" id="refreshAdmin">🔄 به‌روزرسانی</button>
+        <button class="btn px sm" id="exportBtn" style="background:var(--purple);color:#fff">📥 خروجی CSV</button>
+        <button class="btn danger px sm" id="clearBtn">🗑 پاک‌سازی</button>
+        <button class="btn px sm" id="exitAdmin" style="background:var(--green)">🚪 خروج از پنل</button>
+      </div>
+    </div>
+
+    <div class="a-stats">
+      <div class="stat px"><b id="stTotal">۰</b><span>کل کاربران ثبت‌نام‌شده</span></div>
+      <div class="stat px"><b id="stToday">۰</b><span>ثبت‌نام امروز</span></div>
+      <div class="stat px"><b id="stLast" style="font-size:1.1rem">—</b><span>آخرین ثبت‌نام</span></div>
+    </div>
+
+    <div class="srv" id="srvBar">در حال اتصال...</div>
+
+    <div class="a-tools">
+      <input id="searchUser" type="text" placeholder="🔍 جستجوی نام یا شماره موبایل...">
+    </div>
+
+    <div class="table-wrap px">
+      <table>
+        <thead>
+          <tr><th>#</th><th>نام</th><th>نام خانوادگی</th><th>موبایل</th><th>تاریخ ثبت</th><th>ساعت</th></tr>
+        </thead>
+        <tbody id="usersBody"></tbody>
+      </table>
+    </div>
+    <p class="a-note">☁️ داده‌ها از دیتابیس Firebase خوانده می‌شوند و هر ۸ ثانیه خودکار به‌روزرسانی می‌شوند. ردیف‌های دارای علامت ⚠️ به‌خاطر قطعی اینترنت، فقط محلی ذخیره شده‌اند.</p>
+  </div>
+</div>
+
+<div id="toasts"></div>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+
+<script>
+'use strict';
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const LS={
+  get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},
+  set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+};
+
+/* ═══════════════════════════════════════════════
+   ⚙️ تنظیمات — این دو خط رو با اطلاعات خودت پر کن
+   ═══════════════════════════════════════════════ */
+const CFG={
+  // 🔴 آدرس دیتابیس Firebase (از کنسول Firebase → Realtime Database)
+  dbUrl:'', // مثال: 'https://omm-case-default-rtdb.europe-west1.firebasedatabase.app'
+  // 🔑 رمز دیتابیس (از Project Settings → Service accounts → Database secrets)
+  // با این رمز، فقط «تو» می‌تونی اطلاعات کاربران رو بخونی
+  adminSecret:'',
+  // رمز ورود پنل ادمین در سایت
+  adminPass:'1234'
+};
+
+/* ───── پترن‌های پیکسل‌آرت ───── */
+const ART={
+  invader:["..X.....X..","...X...X...","..XXXXXXX..",".XX.XXX.XX.","XXXXXXXXXXX","X.XXXXXXX.X","X.X.....X.X","...XX.XX..."],
+  heart:[".XX..XX.","XXXXXXXX","XXXXXXXX","XXXXXXXX",".XXXXXX.","..XXXX..","...XX..."],
+  ghost:["..XXXX..",".XXXXXX.","XX.XX.XX","XXXXXXXX","XXXXXXXX","XXXXXXXX",".XX..XX."],
+  mushroom:["...XX...","..XXXX..",".XXXXXX.","XX.XX.XX","XXXXXXXX",".XXXXXX.","..XXXX..","..XXXX.."],
+  star:["...XX...","...XX...","XXXXXXXX",".XXXXXX.","..XXXX..",".XX..XX.","XX....XX"],
+  diamond:["...XX...","..XXXX..",".XXXXXX.","XXXXXXXX",".XXXXXX.","..XXXX..","...XX..."],
+  bolt:["....XX..","...XX...","..XXXXX.","....XX..","...XX...","..XX....",".XX.....","X......."],
+  box:["XXXXXXXX","X......X","X.XXXX.X","X.X..X.X","X.XXXX.X","X......X","XXXXXXXX"],
+  shield:["XXXXXXXX","X......X","X..XX..X","X.XXXX.X","X..XX..X",".X....X.","..XXXX.."]
+};
+
+const PRODUCTS=[
+  {id:1,name:'قاب اینوِیدر کلاسیک',desc:'موجود فضایی همیشه‌سبز دنیای arcade؛ برای گیمرهای قدیمی‌سالد.',price:249000,badge:'پرفروش',color:'#00f0ff',art:'invader'},
+  {id:2,name:'قلب نئون',desc:'برای عاشقای سبک سایبری؛ درخششی که تو تاریکی دیده می‌شه.',price:219000,badge:'جدید',color:'#ff2ec4',art:'heart'},
+  {id:3,name:'روح آرکید',desc:'بازی‌خور و بامزه؛ بذار روحِ رترو از گوشیت محافظت کنه!',price:239000,color:'#c4b5fd',art:'ghost'},
+  {id:4,name:'قارچ گیمر',desc:'یه جان اضافه برای گوشی تو؛ سبک رتروی ماریوپسند.',price:229000,old:289000,badge:'٪۲۰ تخفیف',color:'#39ff14',art:'mushroom'},
+  {id:5,name:'ستاره ۸-بیت',desc:'امتیاز بونوسِ همیشه‌روشن؛ مینیمال و چشمگیر.',price:259000,color:'#ffe600',art:'star'},
+  {id:6,name:'الماس سایبری',desc:'درخشش لوکس برای کسایی که خاص بودن رو جدی می‌گیرن.',price:299000,badge:'لوکس',color:'#ff9d00',art:'diamond'}
+];
+
+/* ───── صدا ───── */
+let AC=null,soundOn=true;
+function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}return AC}
+function beep(f=520,d=.05,t='square',v=.05){
+  if(!soundOn)return;const c=ac();if(!c)return;
+  const o=c.createOscillator(),g=c.createGain();
+  o.type=t;o.frequency.value=f;o.connect(g);g.connect(c.destination);
+  const n=c.currentTime;g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+d);
+  o.start(n);o.stop(n+d+.02);
+}
+function jingle(){[523,659,784,1046].forEach((f,i)=>setTimeout(()=>beep(f,.09,'square',.06),i*90))}
+function buzz(){beep(110,.2,'sawtooth',.07)}
+document.addEventListener('pointerdown',()=>{const c=ac();if(c&&c.state==='suspended')c.resume()});
+
+/* ───── پیکسل‌آرت ───── */
+function pixelArt(rows,size=6,glow='#fff'){
+  const cols=rows[0].length,w=document.createElement('div');
+  w.className='p-art';w.style.gridTemplateColumns=`repeat(${cols},${size}px)`;
+  rows.forEach(r=>[...r].forEach(ch=>{
+    const d=document.createElement('i');
+    d.style.width=size+'px';d.style.height=size+'px';
+    if(ch==='X'){d.style.background=glow;d.style.boxShadow=`0 0 ${size}px ${glow}66`}
+    w.appendChild(d);
+  }));
+  return w;
+}
+function mountArts(root=document){
+  $$('.art,.c-art,.fi,.m-art',root).forEach(el=>{
+    el.innerHTML='';
+    el.appendChild(pixelArt(ART[el.dataset.art],+(el.dataset.size||6),el.dataset.color));
+  });
+}
+
+/* ───── توست و کانفتی ───── */
+function toast(msg,type=''){
+  const t=document.createElement('div');t.className='toast '+type;t.textContent=msg;
+  $('#toasts').appendChild(t);
+  setTimeout(()=>t.classList.add('out'),3200);
+  setTimeout(()=>t.remove(),3650);
+}
+function confetti(){
+  const colors=['#ff2ec4','#00f0ff','#ffe600','#39ff14','#9b5cff'];
+  for(let i=0;i<50;i++){
+    const s=document.createElement('i');s.className='cf';
+    s.style.left=Math.random()*100+'vw';
+    s.style.background=colors[i%colors.length];
+    s.style.width=s.style.height=(6+Math.random()*7)+'px';
+    s.style.animationDuration=(1.2+Math.random()*1.5)+'s';
+    s.style.animationDelay=(Math.random()*.4)+'s';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),3300);
+  }
+}
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+/* ───── اعتبارسنجی ───── */
+const FA='۰۱۲۳۴۵۶۷۸۹',AR='٠١٢٣٤٥٦٧٨٩';
+const toEn=s=>(s||'').replace(/[۰-۹]/g,d=>FA.indexOf(d)).replace(/[٠-٩]/g,d=>AR.indexOf(d));
+function normPhone(raw){
+  let s=toEn(raw).replace(/[\s\-()]/g,'');
+  if(s.startsWith('+98'))s='0'+s.slice(3);
+  else if(s.startsWith('0098'))s='0'+s.slice(4);
+  else if(/^98\d{10}$/.test(s))s='0'+s.slice(2);
+  else if(/^9\d{9}$/.test(s))s='0'+s;
+  return s;
+}
+const validPhone=s=>/^09\d{9}$/.test(s);
+const validName=s=>/^[\u0600-\u06FF\u200cA-Za-z\s]{2,30}$/.test((s||'').trim());
+
+/* ───── ارتباط با سرور Firebase (REST — بدون کتابخانه) ───── */
+const dbBase=()=>CFG.dbUrl.replace(/\/+$/,'');
+async function srvPut(path,data){
+  const res=await fetch(`${dbBase()}/${path}.json`,{method:'PUT',body:JSON.stringify(data)});
+  if(!res.ok)throw new Error('http'+res.status);
+  return res.json();
+}
+async function srvGet(path,withAuth){
+  let url=`${dbBase()}/${path}.json`;
+  if(withAuth&&CFG.adminSecret)url+='?auth='+encodeURIComponent(CFG.adminSecret);
+  const res=await fetch(url,{cache:'no-store'});
+  if(!res.ok)throw new Error('http'+res.status);
+  return res.json();
+}
+async function srvDel(path){
+  const res=await fetch(`${dbBase()}/${path}.json`,{method:'DELETE'});
+  if(!res.ok)throw new Error('http'+res.status);
+}
+
+/* ───── محصولات ───── */
+function renderProducts(){
+  $('#grid').innerHTML=PRODUCTS.map(p=>`
+    <article class="card px">
+      ${p.badge?`<span class="badge" style="--c:${p.color}">${p.badge}</span>`:''}
+      <div class="art" data-art="${p.art}" data-color="${p.color}" data-size="7"></div>
+      <h3>${p.name}</h3>
+      <p class="desc">${p.desc}</p>
+      <div class="price"><b>${p.price.toLocaleString('fa-IR')}</b> تومان ${p.old?`<s>${p.old.toLocaleString('fa-IR')}</s>`:''}</div>
+      <button class="btn pink px add" data-id="${p.id}">＋ افزودن به سبد</button>
+    </article>`).join('');
+  mountArts($('#grid'));
+  $$('.add').forEach(b=>b.addEventListener('click',()=>addToCart(+b.dataset.id)));
+}
+
+/* ───── سبد خرید ───── */
+let cart=LS.get('om_cart',[]);
+const saveCart=()=>{LS.set('om_cart',cart);updateCartUI()};
+function addToCart(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  cart.push(id);saveCart();beep(880,.07);
+  toast(`«${p.name}» به سبد اضافه شد 🛒`,'ok');
+}
+function updateCartUI(){
+  $('#cartCount').textContent=cart.length.toLocaleString('fa-IR');
+  $('#cartCount').style.display=cart.length?'grid':'none';
+  renderCart();
+}
+function renderCart(){
+  const box=$('#cartItems');
+  if(!cart.length){
+    box.innerHTML='<p class="empty">سبدت خالیه!<br>یه قاب پیکسلی انتخاب کن 👾</p>';
+    $('#cartTotal').textContent='۰';return;
+  }
+  let total=0;
+  box.innerHTML=cart.map((id,i)=>{
+    const p=PRODUCTS.find(x=>x.id===id);total+=p.price;
+    return `<div class="c-item">
+      <div class="c-art" data-art="${p.art}" data-color="${p.color}" data-size="4"></div>
+      <div class="c-info"><b>${p.name}</b><span>${p.price.toLocaleString('fa-IR')} تومان</span></div>
+      <button class="c-del" data-i="${i}" title="حذف">✕</button>
+    </div>`}).join('');
+  mountArts(box);
+  $$('.c-del').forEach(b=>b.addEventListener('click',()=>{beep(200,.06);cart.splice(+b.dataset.i,1);saveCart()}));
+  $('#cartTotal').textContent=total.toLocaleString('fa-IR');
+}
+function openCart(){$('#cartDrawer').classList.add('open');$('#overlay').classList.add('show');beep(700,.05)}
+function closeCart(){$('#cartDrawer').classList.remove('open');$('#overlay').classList.remove('show')}
+ $('#cartBtn').onclick=openCart;
+ $('#closeCart').onclick=closeCart;
+ $('#overlay').onclick=()=>{closeCart();$('#orderModal').classList.remove('show')};
+ $('#closeOrder').onclick=()=>{$('#orderModal').classList.remove('show');$('#overlay').classList.remove('show')};
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeCart();$('#orderModal').classList.remove('show');$('#overlay').classList.remove('show')}
+});
+ $('#checkoutBtn').onclick=()=>{
+  if(!cart.length){toast('سبد خرید خالیه!','err');buzz();return}
+  const total=cart.reduce((s,id)=>s+PRODUCTS.find(x=>x.id===id).price,0);
+  $('#orderCode').textContent='ORDER: OMM-'+Math.floor(1000+Math.random()*9000);
+  $('#orderSum').innerHTML=`${cart.length.toLocaleString('fa-IR')} قاب — مجموع: <b style="color:var(--yellow)">${total.toLocaleString('fa-IR')}</b> تومان`;
+  cart=[];saveCart();
+  $('#orderModal').classList.add('show');$('#overlay').classList.add('show');
+  jingle();confetti();
+};
+
+/* ───── ثبت‌نام (با ارسال به سرور) ───── */
+function chk(el,cond,msg){
+  const err=el.nextElementSibling;
+  if(!cond){err.textContent=msg;el.classList.add('bad');return false}
+  err.textContent='';el.classList.remove('bad');return true;
+}
+function localMirrorAdd(u){
+  const arr=LS.get('om_users',[]);
+  if(!arr.some(x=>x.mobile===u.mobile))arr.push(u);
+  LS.set('om_users',arr);
+}
+ $('#regForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const fn=$('#fName'),ln=$('#lName'),ph=$('#phone'),btn=$('#regSubmit');
+  const okN=chk(fn,validName(fn.value),'نام معتبر وارد کن (حداقل ۲ حرف، فقط حرف)');
+  const okL=chk(ln,validName(ln.value),'نام خانوادگی معتبر وارد کن');
+  const mob=normPhone(ph.value);
+  const okP=chk(ph,validPhone(mob),'شماره موبایل درست نیست! مثال: 09123456789');
+  if(!(okN&&okL&&okP)){buzz();return}
+
+  const u={first:fn.value.trim(),last:ln.value.trim(),mobile:mob,ts:Date.now()};
+  btn.disabled=true;btn.textContent='⏳ در حال اتصال به سرور...';
+  let status='local';
+  if(CFG.dbUrl){
+    try{
+      let existed=false;
+      try{existed=!!(await srvGet(`exists/${mob}`,false))}catch(_){}
+      await srvPut(`users/${mob}`,{first:u.first,last:u.last,ts:u.ts});
+      srvPut(`exists/${mob}`,true).catch(()=>{});
+      status=existed?'returning':'new';
+    }catch(err){status='fail'}
+  }
+  btn.disabled=false;btn.textContent='🚀 ورود به فروشگاه';
+
+  localMirrorAdd(u);
+  LS.set('om_current_user',u);
+  if(status==='fail'){
+    enterSite(u,true);
+    toast('⚠️ اتصال به سرور برقرار نشد؛ فعلاً محلی ذخیره شد','err');
+  }else{
+    enterSite(u,status==='returning');
+  }
+});
+function enterSite(u,returning){
+  $('#gate').classList.add('hide');
+  document.body.classList.remove('locked');
+  updateUserChip();jingle();confetti();
+  toast(returning?`خوش برگشتی ${u.first} عزیز! 👾`:`ثبت‌نام موفق! خوش اومدی ${u.first} جان 🎉`,'ok');
+}
+function updateUserChip(){
+  const u=LS.get('om_current_user',null),chip=$('#userChip');
+  if(u){chip.style.display='flex';chip.innerHTML=`👤 <b>${esc(u.first)}</b><button id="logoutBtn" title="خروج از حساب">⏻</button>`}
+  else chip.style.display='none';
+}
+document.addEventListener('click',e=>{
+  if(e.target&&e.target.id==='logoutBtn'){
+    localStorage.removeItem('om_current_user');
+    route();toast('از حساب خارج شدی','ok');
+  }
+});
+
+/* ───── پنل ادمین ───── */
+const isAdminHash=()=>/^#\/?admin/i.test(location.hash);
+let serverUsers=[],srvMode='nolocal',pollTimer=null,lastMaxTs=0,currentUsers=[];
+
+function route(){
+  if(isAdminHash()){
+    document.body.classList.remove('locked');
+    $('#site').style.display='none';
+    $('#gate').classList.add('hide');
+    $('#admin').hidden=false;
+    if(sessionStorage.getItem('omAdmin')==='1')showPanel();else showPin();
+  }else{
+    $('#admin').hidden=true;
+    $('#site').style.display='';
+    stopPoll();
+    const u=LS.get('om_current_user',null);
+    if(u){$('#gate').classList.add('hide');document.body.classList.remove('locked')}
+    else{$('#gate').classList.remove('hide');document.body.classList.add('locked')}
+    updateUserChip();
+  }
+}
+function showPin(){$('#pinStep').hidden=false;$('#adminPanel').hidden=true;setTimeout(()=>$('#pinInput').focus(),60)}
+function showPanel(){
+  $('#pinStep').hidden=true;$('#adminPanel').hidden=false;
+  fetchServer().then(renderTable);startPoll();
+}
+ $('#pinForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  if($('#pinInput').value.trim()===CFG.adminPass){sessionStorage.setItem('omAdmin','1');$('#pinErr').textContent='';jingle();showPanel()}
+  else{buzz();$('#pinInput').classList.add('bad');$('#pinErr').textContent='رمز اشتباهه!';setTimeout(()=>$('#pinInput').classList.remove('bad'),500)}
+});
+ $('#pinBack').onclick=()=>location.hash='';
+ $('#exitAdmin').onclick=()=>location.hash='';
+
+async function fetchServer(silent=false){
+  if(!CFG.dbUrl){srvMode='nolocal';return}
+  try{
+    const obj=await srvGet('users',true);
+    serverUsers=Object.entries(obj||{}).map(([mobile,v])=>({mobile,first:v.first||'',last:v.last||'',ts:v.ts||0}));
+    srvMode='ok';
+    const mx=serverUsers.reduce((m,u)=>Math.max(m,u.ts||0),0);
+    if(silent&&lastMaxTs&&mx>lastMaxTs){toast('🔔 یه کاربر جدید از سرور اومد!');beep(1200,.08)}
+    lastMaxTs=mx;
+  }catch(e){
+    const m=e.message||'';
+    srvMode=(m.includes('401')||m.includes('403'))?'auth':'net';
+  }
+}
+function renderTable(){
+  // ادغام: کاربران سرور + کاربران محلی (که هنوز به سرور نرفتن)
+  const byMob=new Map(serverUsers.map(u=>[u.mobile,u]));
+  LS.get('om_users',[]).forEach(u=>{
+    if(!byMob.has(u.mobile))byMob.set(u.mobile,{...u,offline:!CFG.dbUrl?false:true});
+  });
+  const all=[...byMob.values()];
+  currentUsers=all.slice().sort((a,b)=>b.ts-a.ts);
+
+  // وضعیت اتصال
+  const bar=$('#srvBar');
+  const M={
+    ok:['ok',`🟢 متصل به سرور Firebase — ${serverUsers.length.toLocaleString('fa-IR')} کاربر در دیتابیس`],
+    auth:['err','🔴 خطای دسترسی! ADMIN_SECRET در کد یا قوانین (Rules) دیتابیس را بررسی کن'],
+    net:['err','🔴 اتصال به سرور برقرار نشد (اینترنت یا آدرس دیتابیس) — نمایش داده‌های محلی'],
+    nolocal:['warn','🟡 Firebase هنوز تنظیم نشده (CFG.dbUrl خالی است) — فقط ثبت‌نام‌های همین مرورگر دیده می‌شود']
+  };
+  bar.className='srv '+M[srvMode][0];bar.textContent=M[srvMode][1];
+
+  // آمار
+  $('#stTotal').textContent=all.length.toLocaleString('fa-IR');
+  const tk=new Date().toLocaleDateString('fa-IR');
+  $('#stToday').textContent=all.filter(u=>new Date(u.ts).toLocaleDateString('fa-IR')===tk).length.toLocaleString('fa-IR');
+  const last=all.slice().sort((a,b)=>b.ts-a.ts)[0];
+  $('#stLast').textContent=last?`${esc(last.first)} ${esc(last.last)}`:'—';
+
+  // جستجو
+  const q=($('#searchUser').value||'').trim(),qe=toEn(q);
+  let users=currentUsers;
+  if(q)users=users.filter(u=>(u.first+' '+u.last+' '+u.mobile).includes(q)||(u.first+' '+u.last+' '+u.mobile).includes(qe));
+
+  $('#usersBody').innerHTML=users.length?users.map((u,i)=>`
+    <tr>
+      <td>${(i+1).toLocaleString('fa-IR')}</td>
+      <td>${esc(u.first)}${u.offline?' <span class="off-tag">⚠️</span>':''}</td>
+      <td>${esc(u.last)}</td>
+      <td><span class="mob" dir="ltr">${u.mobile}</span></td>
+      <td>${new Date(u.ts).toLocaleDateString('fa-IR')}</td>
+      <td>${new Date(u.ts).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}</td>
+    </tr>`).join('')
+    :'<tr><td colspan="6" class="empty">هنوز کاربری ثبت‌نام نکرده 😴</td></tr>';
+}
+ $('#searchUser').addEventListener('input',renderTable);
+ $('#refreshAdmin').onclick=async()=>{await fetchServer();renderTable();toast('لیست به‌روز شد ✅','ok')};
+function startPoll(){stopPoll();pollTimer=setInterval(async()=>{await fetchServer(true);renderTable()},8000)}
+function stopPoll(){if(pollTimer){clearInterval(pollTimer);pollTimer=null}}
+ $('#clearBtn').onclick=async()=>{
+  if(!confirm('همهٔ کاربران از سرور و حافظهٔ محلی پاک شوند؟'))return;
+  for(const u of currentUsers){try{if(CFG.dbUrl)await srvDel(`users/${u.mobile}`)}catch(_){}}
+  LS.set('om_users',[]);serverUsers=[];lastMaxTs=0;
+  await fetchServer();renderTable();toast('پاک‌سازی انجام شد','err');
+};
+ $('#exportBtn').onclick=()=>{
+  if(!currentUsers.length){toast('کاربری برای خروجی نیست!','err');return}
+  let csv='\uFEFFنام,نام خانوادگی,موبایل,تاریخ,ساعت\n';
+  currentUsers.forEach(u=>{
+    csv+=`${u.first},${u.last},${u.mobile},${new Date(u.ts).toLocaleDateString('fa-IR')},${new Date(u.ts).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}\n`;
+  });
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download='ommcase-users.csv';a.click();
+  toast('فایل CSV دانلود شد 📥','ok');
+};
+
+/* ───── صدا و ستاره‌ها ───── */
+ $('#soundBtn').onclick=()=>{soundOn=!soundOn;$('#soundBtn').textContent=soundOn?'🔊':'🔇';if(soundOn)beep(660,.06)};
+document.addEventListener('click',e=>{if(e.target.closest('button,a'))beep(520,.035,'square',.03)});
+(function makeStars(){
+  const st=$('#stars');
+  for(let i=0;i<40;i++){
+    const s=document.createElement('i');s.className='star';
+    s.style.left=Math.random()*100+'%';s.style.top=Math.random()*70+'%';
+    const sz=Math.random()<.3?4:2;
+    s.style.width=s.style.height=sz+'px';
+    s.style.background=Math.random()<.5?'#00f0ff':'#ff2ec4';
+    s.style.animationDelay=(Math.random()*3)+'s';
+    st.appendChild(s);
+  }
+})();
+
+/* ───── شروع ───── */
+renderProducts();
+updateCartUI();
+mountArts();
+ $('#year').textContent=new Date().toLocaleDateString('fa-IR',{year:'numeric'});
+window.addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>
